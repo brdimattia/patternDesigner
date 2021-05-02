@@ -123,10 +123,9 @@ function fillBlanks() {
 }
 
 function saveCanvas(canvas) {
-  var dataURL = canvas.toDataURL('image/jpeg');
-  // canvas.toBlob(function (blob) {
-  //   saveAs(blob, 'pattern.png');
-  // });
+  canvas.toBlob(function (blob) {
+    saveAs(blob, 'pattern.png');
+  });
 }
 
 function exportPattern() {
@@ -143,7 +142,8 @@ function exportPattern() {
 }
 
 // reset - refresh?
-// save/export/share? -- replace not full tiles with blanks?
+// save/export
+// social media share? -- replace not full tiles with blanks?
 // set cursor when hovering over grid and not grid
 // fix bug that allows the pool-tiles to be rrmoved when dropped back in the pool
 // fix bug allowing tiles to stay opaque when dragged and dropped outside of the grid/pool/control/title
