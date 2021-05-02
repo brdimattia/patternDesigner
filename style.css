@@ -23,7 +23,7 @@
 
 .button-grid {
   display: inline-grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
 }
 
 .control-button {
@@ -38,7 +38,7 @@
 
 .tile-pool {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
 }
 
 .pool-tile {

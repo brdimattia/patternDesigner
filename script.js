@@ -56,46 +56,104 @@ function onDragOver(event) {
   event.preventDefault();
 }
 
+function createGridTileFromDragTile(dragTile, gridX, gridY) {
+  var newTile = dragTile.cloneNode(true);
+  newTile.removeAttribute('style');
+  newTile.setAttribute('class', 'grid-tile');
+  newTile.setAttribute('id', 'grid_' + gridX + '_' + gridY);
+  return newTile;
+}
+
+function placeTile(tile, dropzone) {
+  dropzone.style.border = '0';
+  dropzone.appendChild(newTile);
+}
+
 function onDrop(event) {
   // Get data transfer properties
   const id = event.dataTransfer.getData('text');
-  const tile = document.getElementById(id);
+  const dragTile = document.getElementById(id);
   let dropzone = event.target;
   tileGridContainer = document.getElementsByClassName('tile-grid-container')[0];
   if (isDescendant(tileGridContainer, dropzone)) {
     // If not dropped on itself
     if (dropzone.tagName != 'IMG') {
       // Clone tile and change class and id
-      var newTile = tile.cloneNode(true);
-      newTile.removeAttribute('style');
-      newTile.setAttribute('class', 'grid-tile');
-      newTile.setAttribute(
-        'id',
-        'grid_' + dropzone.getAttribute('x') + '_' + dropzone.getAttribute('y')
-      ); // set to grid space
-
-      // Insert tile
-      dropzone.style.border = '0';
-      dropzone.appendChild(newTile);
+      newTile = createGridTileFromDragTile(
+        dragTile,
+        dropzone.getAttribute('x'),
+        dropzone.getAttribute('y')
+      );
+      placeTile(newTile, dropzone);
 
       // Remove old tile if dragged in grid and fix border
-      if (tile.getAttribute('class') == 'grid-tile') {
-        tile.parentElement.removeAttribute('style');
-        tile.remove();
+      if (dragTile.getAttribute('class') == 'grid-tile') {
+        dragTile.parentElement.removeAttribute('style');
+        dragTile.remove();
       }
     } else {
       // Return opacity to 100%
-      tile.removeAttribute('style');
+      dragTile.removeAttribute('style');
     }
   } else {
     // Remove dragged out tiles
-    tile.parentElement.removeAttribute('style');
-    tile.remove();
+    dragTile.parentElement.removeAttribute('style');
+    dragTile.remove();
   }
   //clear data
   event.dataTransfer.clearData();
 }
 
-// reset
+function fillBlanks() {
+  console.log(`Filling empty squares with blank tiles.`);
+  var gridSpaces = document.getElementsByClassName('tile-grid-item');
+  gridSpaces = Array.from(gridSpaces);
+  gridSpaces.forEach((gridSpace) => {
+    if (gridSpace.children.length == 0) {
+      // Space is empty, add a blank tile
+      let blankPoolTile = document.getElementById('pool_blank_tile');
+      newTile = createGridTileFromDragTile(
+        blankPoolTile,
+        gridSpace.getAttribute('x'),
+        gridSpace.getAttribute('y')
+      );
+      placeTile(newTile, gridSpace);
+    }
+  });
+}
+
+function saveCanvas(canvas) {
+  console.log(canvas);
+
+  window.open(canvas.toDataURL('image/png'));
+}
+
+function exportPattern() {
+  fillBlanks();
+  let patternDiv = document.getElementsByClassName('tile-grid-container')[0];
+  html2canvas(patternDiv, {
+    allowTaint: true,
+    taintTest: false,
+    logging: true,
+    onrendered: saveCanvas,
+  }).then(function (canvas) {
+    saveCanvas(canvas);
+    // var img = canvas.toDataURL();
+    // window.open(img);
+    // var w = window.open('');
+    // w.document.write(canvas);
+    // canvas.toBlob(function (blob) {
+    //   saveAs(blob, 'pattern.png');
+    // });
+  });
+}
+
+// reset - refresh?
 // save/export/share? -- replace not full tiles with blanks?
 // set cursor when hovering over grid and not grid
+// fix bug that allows the pool-tiles to be rrmoved when dropped back in the pool
+// fix bug allowing tiles to stay opaque when dragged and dropped outside of the grid/pool/control/title
+// disable drag on buttons
+// overwrite tiles?
+// export html2canvas as js asset
+// move imgs to assets
