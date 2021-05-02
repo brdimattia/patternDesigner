@@ -123,9 +123,9 @@ function fillBlanks() {
 }
 
 function saveCanvas(canvas) {
-  console.log(canvas);
-
-  window.open(canvas.toDataURL('image/png'));
+  canvas.toBlob(function (blob) {
+    saveAs(blob, 'pattern.png');
+  });
 }
 
 function exportPattern() {
@@ -138,13 +138,6 @@ function exportPattern() {
     onrendered: saveCanvas,
   }).then(function (canvas) {
     saveCanvas(canvas);
-    // var img = canvas.toDataURL();
-    // window.open(img);
-    // var w = window.open('');
-    // w.document.write(canvas);
-    // canvas.toBlob(function (blob) {
-    //   saveAs(blob, 'pattern.png');
-    // });
   });
 }
 
