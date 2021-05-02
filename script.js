@@ -123,9 +123,10 @@ function fillBlanks() {
 }
 
 function saveCanvas(canvas) {
-  canvas.toBlob(function (blob) {
-    saveAs(blob, 'pattern.png');
-  });
+  var dataURL = canvas.toDataURL('image/jpeg');
+  // canvas.toBlob(function (blob) {
+  //   saveAs(blob, 'pattern.png');
+  // });
 }
 
 function exportPattern() {
