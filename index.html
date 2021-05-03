@@ -3,8 +3,12 @@
   <head>
     <title>Pattern Designer</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="./imgs/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="./imgs/favicon.ico" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="./assets/imgs/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="./assets/imgs/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <div class="grid-container">
@@ -25,20 +29,20 @@
           name="rotate-counter-clockwise"
           onclick="rotatePool(-90)"
         >
-          <img src="./imgs/buttons/rotate-counter-clockwise.png" />
+          <img src="./assets/imgs/buttons/rotate-counter-clockwise.png" />
         </div>
         <div
           class="control-button"
           name="rotate-clockwise"
           onclick="rotatePool(90)"
         >
-          <img src="./imgs/buttons/rotate-clockwise.png" />
+          <img src="./assets/imgs/buttons/rotate-clockwise.png" />
         </div>
         <div class="control-button" name="export" onclick="exportPattern()">
-          <img src="./imgs/buttons/export.png" />
+          <img src="./assets/imgs/buttons/export.png" />
         </div>
         <div class="control-button" name="reset" onclick="location.reload()()">
-          <img src="./imgs/buttons/reset.png" />
+          <img src="./assets/imgs/buttons/reset.png" />
         </div>
       </div>
       <div class="grid-item">
@@ -505,7 +509,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/blank_tile.png" />
+          <img src="./assets/imgs/tiles/blank_tile.png" />
         </div>
         <div
           class="pool-tile"
@@ -514,7 +518,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/blue_arrow.png" />
+          <img src="./assets/imgs/tiles/blue_arrow.png" />
         </div>
         <div
           class="pool-tile"
@@ -523,7 +527,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/blue_dot.png" />
+          <img src="./assets/imgs/tiles/blue_dot.png" />
         </div>
         <div
           class="pool-tile"
@@ -532,7 +536,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/green_rhombus.png" />
+          <img src="./assets/imgs/tiles/green_rhombus.png" />
         </div>
         <div
           class="pool-tile"
@@ -541,7 +545,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/grey_plus.png" />
+          <img src="./assets/imgs/tiles/grey_plus.png" />
         </div>
         <div
           class="pool-tile"
@@ -550,7 +554,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/orange_tear.png" />
+          <img src="./assets/imgs/tiles/orange_tear.png" />
         </div>
         <div
           class="pool-tile"
@@ -559,7 +563,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/purple_blob.png" />
+          <img src="./assets/imgs/tiles/purple_blob.png" />
         </div>
         <div
           class="pool-tile"
@@ -568,7 +572,7 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/red_blob.png" />
+          <img src="./assets/imgs/tiles/red_blob.png" />
         </div>
         <div
           class="pool-tile"
@@ -577,12 +581,12 @@
           draggable="true"
           ondragstart="onDragStart(event);"
         >
-          <img src="./imgs/tiles/yellow_slash.png" />
+          <img src="./assets/imgs/tiles/yellow_slash.png" />
         </div>
       </div>
     </div>
     <script src="script.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <script src="./assets/js/html2canvas.js"></script>
+    <script src="./assets/js/FileSaver.js"></script>
   </body>
 </html>
