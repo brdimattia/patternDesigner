@@ -148,7 +148,6 @@ function exportPattern() {
 // fix bug that allows the pool-tiles to be removed when dropped back in the pool
 // fix bug allowing tiles to stay opaque when dragged and dropped outside of the grid/pool/control/title
 // disable drag on buttons
-// overwrite tiles
 // export html2canvas as js asset
 // move imgs to assets
 // clean up functions
