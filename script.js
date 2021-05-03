@@ -72,28 +72,31 @@ function placeTile(tile, dropzone) {
 function onDrop(event) {
   // Get data transfer properties
   const id = event.dataTransfer.getData('text');
-  const dragTile = document.getElementById(id);
+  let dragTile = document.getElementById(id);
   let dropzone = event.target;
   tileGridContainer = document.getElementsByClassName('tile-grid-container')[0];
   if (isDescendant(tileGridContainer, dropzone)) {
     // If not dropped on itself
-    if (dropzone.tagName != 'IMG') {
-      // Clone tile and change class and id
-      newTile = createGridTileFromDragTile(
-        dragTile,
-        dropzone.getAttribute('x'),
-        dropzone.getAttribute('y')
-      );
-      placeTile(newTile, dropzone);
+    if (dropzone.tagName == 'IMG') {
+      // Dropping onto an existing tile
+      let currentTile = dropzone.parentElement;
+      let newDropzone = currentTile.parentElement;
+      currentTile.remove();
+      dropzone = newDropzone;
+    }
 
-      // Remove old tile if dragged in grid and fix border
-      if (dragTile.getAttribute('class') == 'grid-tile') {
-        dragTile.parentElement.removeAttribute('style');
-        dragTile.remove();
-      }
-    } else {
-      // Return opacity to 100%
-      dragTile.removeAttribute('style');
+    // Clone tile and change class and id
+    newTile = createGridTileFromDragTile(
+      dragTile,
+      dropzone.getAttribute('x'),
+      dropzone.getAttribute('y')
+    );
+    placeTile(newTile, dropzone);
+
+    // Remove old tile if dragged in grid and fix border
+    if (dragTile.getAttribute('class') == 'grid-tile') {
+      dragTile.parentElement.removeAttribute('style');
+      dragTile.remove();
     }
   } else {
     // Remove dragged out tiles
@@ -141,13 +144,12 @@ function exportPattern() {
   });
 }
 
-// reset - refresh?
-// save/export
-// social media share? -- replace not full tiles with blanks?
 // set cursor when hovering over grid and not grid
-// fix bug that allows the pool-tiles to be rrmoved when dropped back in the pool
+// fix bug that allows the pool-tiles to be removed when dropped back in the pool
 // fix bug allowing tiles to stay opaque when dragged and dropped outside of the grid/pool/control/title
 // disable drag on buttons
-// overwrite tiles?
+// overwrite tiles
 // export html2canvas as js asset
 // move imgs to assets
+// clean up functions
+// fix spacing

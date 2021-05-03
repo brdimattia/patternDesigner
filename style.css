@@ -23,7 +23,7 @@
 
 .button-grid {
   display: inline-grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
 }
 
 .control-button {
