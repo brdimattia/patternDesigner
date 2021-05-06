@@ -34,12 +34,12 @@ function isDescendant(parent, child) {
 }
 
 function onDragStart(event) {
+  source = event.currentTarget;
   // Set dataTransfer properties
-  event.dataTransfer.setData('text/plain', event.currentTarget.id);
+  event.dataTransfer.setData('text/plain', source.id);
   event.dataTransfer.effectAllowed = 'move';
 
   //Set the Drag Image
-  source = event.currentTarget;
   event.dataTransfer.setDragImage(
     source,
     source.offsetWidth / 2,
@@ -69,12 +69,20 @@ function placeTile(tile, dropzone) {
   dropzone.appendChild(newTile);
 }
 
+function removeTileIfClass(tile, className) {
+  if (tile.getAttribute('class') == className) {
+    tile.parentElement.removeAttribute('style');
+    tile.remove();
+  }
+}
+
 function onDrop(event) {
   // Get data transfer properties
   const id = event.dataTransfer.getData('text');
   let dragTile = document.getElementById(id);
   let dropzone = event.target;
   tileGridContainer = document.getElementsByClassName('tile-grid-container')[0];
+  tilePool = document.getElementsByClassName('tile-pool')[0];
   if (isDescendant(tileGridContainer, dropzone)) {
     // If not dropped on itself
     if (dropzone.tagName == 'IMG') {
@@ -94,17 +102,20 @@ function onDrop(event) {
     placeTile(newTile, dropzone);
 
     // Remove old tile if dragged in grid and fix border
-    if (dragTile.getAttribute('class') == 'grid-tile') {
-      dragTile.parentElement.removeAttribute('style');
-      dragTile.remove();
-    }
+    removeTileIfClass(dragTile, 'grid-tile');
   } else {
-    // Remove dragged out tiles
-    dragTile.parentElement.removeAttribute('style');
-    dragTile.remove();
+    removeTileIfClass(dragTile, 'grid-tile');
   }
   //clear data
   event.dataTransfer.clearData();
+}
+
+function onDragEnd(event) {
+  source = event.currentTarget;
+  // clear style if grid tile drag is canceled
+  if (source.getAttribute('class') == 'grid-tile') {
+    source.removeAttribute('style');
+  }
 }
 
 function fillBlanks() {
@@ -143,12 +154,3 @@ function exportPattern() {
     saveCanvas(canvas);
   });
 }
-
-// set cursor when hovering over grid and not grid
-// fix bug that allows the pool-tiles to be removed when dropped back in the pool
-// fix bug allowing tiles to stay opaque when dragged and dropped outside of the grid/pool/control/title
-// disable drag on buttons
-// export html2canvas as js asset
-// move imgs to assets
-// clean up functions
-// fix spacing
