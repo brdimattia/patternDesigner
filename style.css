@@ -67,3 +67,20 @@
   display: block;
   cursor: move;
 }
+
+@font-face {
+    font-family: 'GlyphWorld Meadow';
+    src: url('GlyphWorld-Meadow.woff2') format('woff2'),
+        url('GlyphWorld-Meadow.woff') format('woff'),
+        url('GlyphWorld-Meadow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.heading-grid h1 {
+  font-family: 'GlyphWorld Meadow';
+  font-weight: normal;
+  font-style: normal;
+}
